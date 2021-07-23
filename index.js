@@ -11,7 +11,12 @@ const getInput = () => {
     return inquirer.prompt(textInput)
         .then(answers => {
             console.log(answers);
-            return generateMD(answers);
+            // console.log(JSON.stringify(answers.license));
+            let obj = {
+                ...answers, 
+                license: answers.license[0]
+            }
+            return generateMD(obj);
         })
         .then(readme => writeFileAsync("./README1.md", readme))
         .catch(err => console.log(err))
